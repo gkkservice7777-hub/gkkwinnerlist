@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ကစားသမား စာရင်း (No. | Username)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            
+            /* Christmas Theme Background & Effects - Updated to Deep Dark Red #400000 */
+            background-color: #400000; /* Deep Dark Red */
+            background-image: linear-gradient(to bottom, #400000, #660000); /* Gradient to a slightly lighter deep red */
+            overflow: hidden; 
+            position: relative;
+            padding-top: 6rem; /* Add top padding to body to account for fixed nav bar (h-24 ~ 6rem) */
+        }
+        
+        /* --- Snowflakes CSS --- */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        .snowflake {
+            position: absolute;
+            background: #FFFFFF;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+            will-change: transform;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            z-index: 10;
+        }
+
+        /* List scrollbar style for better looks (Dark Red track) */
+        #list-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #list-container::-webkit-scrollbar-track {
+            background: #330000; /* Even darker red track */
+            border-radius: 10px;
+        }
+
+        #list-container::-webkit-scrollbar-thumb {
+            background: #ffd700; /* Gold thumb (kept for contrast) */
+            border-radius: 10px;
+        }
+
+        /* Table styling for zebra stripes and borders - Adjusted for Darker Red */
+        .player-row:nth-child(even) {
+            background-color: rgba(90, 0, 0, 0.6); /* Darker Red transparency */
+        }
+        .player-row:nth-child(odd) {
+            background-color: rgba(102, 0, 0, 0.6); /* Slightly Lighter Dark Red transparency */
+        }
+        /* Hover effect */
+        .player-row:hover {
+            background-color: rgba(130, 0, 0, 0.7) !important; /* Brighter red on hover */
+        }
+
+        /* Styling for cells */
+        .player-cell {
+            padding: 10px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2); /* Light gold/yellow border */
+        }
+    </style>
+</head>
+<body class="antialiased text-white relative pt-24 pb-10"> 
+    
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#590000] shadow-xl border-b border-yellow-300/50 h-20 flex items-center">
+        <div class="container mx-auto px-4 flex justify-between items-center w-full">
+            <div class="flex items-center space-x-3">
+                <img src="https://i0.wp.com/gkk777.net/wp-content/uploads/2025/05/photo_2024-05-05_18-26-46.jpg?fit=640%2C640&ssl=1" 
+                     alt="GKK 99 Logo" 
+                     class="h-10 w-10 rounded-lg border-2 border-yellow-300 object-cover"
+                     onerror="this.src='https://placehold.co/40x40/ffd700/400000?text=L';"
+                >
+                <span class="text-xl font-bold text-yellow-300 hidden sm:inline">GKK777</span>
+            </div>
+            
+            <button onclick="window.location.href='https://gkk777cta.mssg.me/'"
+                    class="px-4 py-2 bg-yellow-400 text-[#400000] font-semibold rounded-full shadow-md hover:bg-yellow-300 transition duration-300 transform hover:scale-105 active:scale-95">
+                ဆက်သွယ်ရန်
+            </button>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 w-full max-w-sm md:max-w-md lg:max-w-lg z-10 relative">
+
+        <header class="text-center mb-6">
+            <h1 class="text-4xl font-extrabold text-yellow-300 drop-shadow-lg">
+                Congratulations
+            </h1>
+            <p class="text-lg text-white-200 mt-1">
+                2026 နှစ်သစ် ကံကောင်းခြင်း ငွေသွင်းမလို 
+အခမဲ့ဘောနပ်ကို Channel Join ရရှိသွားသောမန်ဘာများ
+            </p>
+        </header>
+
+        <div id="list-container" 
+             class="bg-[#590000]/70 rounded-xl shadow-2xl backdrop-blur-sm border border-[#660000]/50 overflow-hidden overflow-y-auto h-[70vh] w-full transition duration-500">
+            
+            <table class="min-w-full divide-y divide-[#660000]">
+                <thead class="bg-[#590000] sticky top-0 z-20 shadow-lg border-b border-yellow-300">
+                    <tr>
+                        <th scope="col" class="player-cell w-1/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">
+                            No
+                        </th>
+                        <th scope="col" class="player-cell w-3/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">
+                            Username
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="player-table-body" class="bg-transparent divide-y divide-[#660000]">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableBody = document.getElementById('player-table-body');
+            const body = document.body;
+            const SNOWFLAKE_COUNT = 100;
+            const MAX_PLAYERS = 250; 
+
+            if (!tableBody) return;
+
+            // --- 1. Username ကို တစ်လုံးခြား (*) ဖြင့် အစားထိုးသည့် Function ---
+            function maskUsername(username) {
+                if (!username) return "";
+                let masked = "";
+                let charCount = 0; 
+
+                for (let i = 0; i < username.length; i++) {
+                    const char = username[i];
+                    
+                    if (char === ' ') {
+                        // space ကို နဂိုအတိုင်းထားမည်
+                        masked += ' ';
+                    } else {
+                        // စစ်မှန်သော အက္ခရာ/နံပါတ်ဖြစ်ပါက တစ်လုံးခြား Masking လုပ်မည်
+                        if (charCount % 2 === 0) {
+                            // 0, 2, 4, ... index များ (နဂိုအတိုင်းထား)
+                            masked += char;
+                        } else {
+                            // 1, 3, 5, ... index များ (ကြယ်ပွင့်ပြောင်း)
+                            masked += '*';
+                        }
+                        charCount++;
+                    }
+                }
+                return masked;
+            }
+            
+            // --- 2. Snowflakes Creation ---
+            function createSnowflake() {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+
+                // အရွယ်အစားကို ကျပန်းသတ်မှတ် (1px to 4px)
+                const size = Math.random() * 3 + 1; 
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+
+                // စတင်နေရာကို ကျပန်းသတ်မှတ် (0% to 100%)
+                const startX = Math.random() * 100;
+                snowflake.style.left = `${startX}vw`;
+
+                // Animation ကြာချိန်ကို ကျပန်းသတ်မှတ် (10s and 30s)
+                const duration = Math.random() * 20 + 10; 
+                snowflake.style.animationDuration = `${duration}s`;
+
+                // Animation စတင်ချိန်ကို ကျပန်းသတ်မှတ် (တစ်ပြိုင်တည်း မကျစေရန်)
+                const delay = Math.random() * 15;
+                snowflake.style.animationDelay = `-${delay}s`;
+
+                // မျက်နှာပြင် အပေါ်မှ စတင်စေရန်
+                snowflake.style.top = `${-Math.random() * 100}px`;
+
+                body.appendChild(snowflake);
+            }
+
+            for (let i = 0; i < SNOWFLAKE_COUNT; i++) {
+                createSnowflake();
+            }
+
+            // --- 3. Array Random Shuffle Function (Refresh လုပ်တိုင်း ပြောင်းလဲစေရန်) ---
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+                }
+            }
+            
+            // --- 4. Player List Generation (Custom IDs ဖြင့် အစားထိုးခြင်း၊ Random Shuffle ဖြင့် ပြသခြင်း) ---
+            function generatePlayerList() {
+                
+                // *** ၄.၁။ သင်ထည့်သွင်းခိုင်းသော ID/ဖုန်းနံပါတ် ၂၅၀ ခု ***
+                const finalUsernames = [
+                    "gk09684869446", "gkayetz13", "gk09424484227", "gk09782727368", "gkapk296",
+                    "gk09665984272", "gk09969496135", "gk09671623279", "gk09958649911", "gk09768454923",
+                    "gkijlo16", "gkhateboy86", "gk09650981329", "gk09676850037", "gk09988893549",
+                    "gk09964799330", "gk09401522812", "gk09988371759", "gk4591114", "gk09793079878",
+                    "gk09784407564", "gksno712", "gkaungzinmoe", "gkdoxob", "gk09782286435",
+                    "gk09899170680", "gk09454636209", "gkaung135790", "gk09455159664", "gk09400460796",
+                    "gkccl90", "gkakuma073", "gk09971311782", "gk09979360979", "gkksw90",
+                    "gkkyikhin", "gk09788225225", "gknn2892", "gk09788227225", "gktalon",
+                    "gk09442002678", "gkeh191", "gkkayin1", "gkspyl277083", "gk09753266885",
+                    "gk09517045000", "gkmtgk92", "gkmoethiha", "gk09758984309", "gkaungzin19",
+                    "gk0998124736", "gk0973459081", "gk0967284519", "gk0958142907", "gk0976093845",
+                    "gk0994738206", "gk0961589024", "gk0957428196", "gk0972845601", "gk0996154832",
+                    "gk0968402751", "gk0953084169", "gk0979518246", "gk0992847501", "gk0967391058",
+                    "gk0956812473", "gk0974038165", "gk0997502384", "gk0962154897", "gk0959740382",
+                    "gk0971286490", "gk0993648175", "gk0965801324", "gk0952479861", "gk0978625049",
+                    "gk0991084736", "gk0969473528", "gk0956318094", "gk0975204918", "gk0994862510",
+                    "gk0963048975", "gk0958724163", "gk0976491802", "gk0992357648", "gk0967184093",
+                    "gk0954930867", "gk0978043251", "gk0996725819", "gk0961837450", "gk0959406281",
+                    "gk0973569104", "gk0995148062", "gk0964289713", "gk0957612349", "gk0979821465",
+                    "gk0993074581", "gk0968541907", "gk0952187640", "gk0976419038", "gk0998602147",
+                    "gk0974829301", "gk0993061847", "gk0965178204", "gk0957841629", "gk0979306482",
+                    "gk0991748206", "gk0968024591", "gk0953697418", "gk0976482059", "gk0995207834",
+                    "gk0961749382", "gk0958204671", "gk0973058642", "gk0998612475", "gk0964920187",
+                    "gk0957136804", "gk0978241509", "gk0994073682", "gk0967309145", "gk0952687491",
+                    "gk0975412086", "gk0996824503", "gk0969157832", "gk0954308127", "gk0978635204",
+                    "gk0992046871", "gk0965812479", "gk0959473106", "gk0974206851", "gk0997361584",
+                    "gk0968405719", "gk0953186027", "gk0976829430", "gk0994158706", "gk0962378045",
+                    "gk0958614293", "gk0975093862", "gk0996827410", "gk0961487309", "gk0953749806",
+                    "gk0978206415", "gk0995043872", "gk0967391580", "gk0952864719", "gk0974519826",
+                    "gk0998371604", "gk0962045973", "gk0959186247", "gk0976821409", "gk0994517038",
+                    "gk0963785941", "gk0956408217", "gk0978243690", "gk0991628475", "gk0965407812",
+                    "gk0953892746", "gk0976138205", "gk0997483061", "gk0968254719", "gk0951609834",
+                    "gk0974308621", "gk0995827416", "gk0967190348", "gk0958432617", "gk0975086142",
+                    "gk0993718265", "gk0962847091", "gk0959173862", "gk0976310845", "gk0998462703",
+                    "gk0965703418", "gk0952386749", "gk0978146302", "gk0994251786", "gk0961835097",
+                    "gk0957608421", "gk0973029814", "gk0996815742", "gk0968450129", "gk0952379186",
+                    "gk0975204681", "gk0993748160", "gk0967183405", "gk0958602971", "gk0976418523",
+                    "gk0992804637", "gk0965309174", "gk0951748620", "gk0978042631", "gk0996157408",
+                    "gk0964829315", "gk0957391602", "gk0973208469", "gk0998746152", "gk0961584703",
+                    "gk0956809234", "gk0975413086", "gk0992634871", "gk0967041829", "gk0958316947",
+                    "gk0976184203", "gk0994520816", "gk0963709542", "gk0952497861", "gk0978641035",
+                    "gk0997184620", "gk0965408137", "gk0959362714", "gk0973816409", "gk0996248157",
+                    "gk0962754031", "gk0958407169", "gk0975182634", "gk0994736802", "gk0968315207",
+                    "gk0952649183", "gk0977406185", "gk0993052846", "gk0965187092", "gk0958713460",
+                    "gk0976240819", "gk0998502734", "gk0964073185", "gk0951629847", "gk0978305416",
+                    "gk0992746801", "gk0965198427", "gk0957046318", "gk0974629180", "gk0996381754",
+                    "gk0968150342", "gk0952476908", "gk0975831426", "gk0994708163", "gk0963087519",
+                    "gk0958614207", "gk0979152046", "gk0992847165", "gk0965039184", "gk0957418203",
+                    "gk0976385204", "gk0994716058", "gk0962847305", "gk0958601742", "gk0974528061",
+                    "gk0996302847", "gk0967158043", "gk0952487169", "gk0978045162", "gk0995724180"
+                ];
+
+                // *** Refresh လုပ်တိုင်း ပြောင်းလဲစေရန် စာရင်းတစ်ခုလုံးကို Random Shuffle လုပ်ခြင်း ***
+                shuffleArray(finalUsernames); 
+
+                const fragment = document.createDocumentFragment();
+
+                // စာရင်းထဲမှ Username များကို အသုံးပြုပြီး row များ ဖန်တီးခြင်း
+                const listLength = finalUsernames.length; 
+
+                for (let i = 0; i < listLength; i++) {
+                    const row = document.createElement('tr');
+                    row.className = "player-row hover:bg-[#820000]/70 transition duration-150";
+                    
+                    const playerNumber = i + 1; // 1 ကနေ စရေရန် (အစဉ်လိုက်အတိုင်း)
+                    // ဤနေရာတွင် maskUsername function ကို ခေါ်ဆိုပြီး Username ကို * ဖြင့် အစားထိုးသည်။
+                    const maskedName = maskUsername(finalUsernames[i]); 
+
+                    row.innerHTML = `
+                        <td class="player-cell whitespace-nowrap text-sm font-medium text-yellow-300">
+                            ${playerNumber}
+                        </td>
+                        <td class="player-cell whitespace-nowrap text-base font-semibold text-white">
+                            ${maskedName}
+                        </td>
+                    `;
+                    fragment.appendChild(row);
+                }
+                tableBody.appendChild(fragment);
+            }
+
+            // စာရင်းကို စတင်ထုတ်လုပ်ခြင်း
+            generatePlayerList();
+        });
+    </script>
+</body>
+</html>
