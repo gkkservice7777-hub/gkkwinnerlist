@@ -1,95 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ကစားသမား စာရင်း (No. | Username)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            background-color: #400000;
-            background-image: linear-gradient(to bottom, #400000, #660000);
-            overflow-x: hidden; 
-            position: relative;
-            padding-top: 6rem;
-        }
-        
-        @keyframes fall {
-            to { transform: translateY(100vh); }
-        }
-        .snowflake {
-            position: absolute;
-            background: #FFFFFF;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.8;
-            will-change: transform;
-            animation-name: fall;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            z-index: 10;
-        }
-
-        #list-container::-webkit-scrollbar { width: 8px; }
-        #list-container::-webkit-scrollbar-track { background: #330000; border-radius: 10px; }
-        #list-container::-webkit-scrollbar-thumb { background: #ffd700; border-radius: 10px; }
-
-        .player-row:nth-child(even) { background-color: rgba(90, 0, 0, 0.6); }
-        .player-row:nth-child(odd) { background-color: rgba(102, 0, 0, 0.6); }
-        .player-row:hover { background-color: rgba(130, 0, 0, 0.7) !important; }
-
-        .player-cell {
-            padding: 10px 16px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-        }
-    </style>
-</head>
-<body class="antialiased text-white relative pt-24 pb-10"> 
-    
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#590000] shadow-xl border-b border-yellow-300/50 h-20 flex items-center">
-        <div class="container mx-auto px-4 flex justify-between items-center w-full">
-            <div class="flex items-center space-x-3">
-                <img src="https://i0.wp.com/gkk777.net/wp-content/uploads/2025/05/photo_2024-05-05_18-26-46.jpg?fit=640%2C640&ssl=1" 
-                     alt="GKK 99 Logo" 
-                     class="h-10 w-10 rounded-lg border-2 border-yellow-300 object-cover"
-                     onerror="this.src='https://placehold.co/40x40/ffd700/400000?text=L';">
-                <span class="text-xl font-bold text-yellow-300 hidden sm:inline">GKK777</span>
-            </div>
-            <button onclick="window.location.href='https://gkk777cta.mssg.me/'"
-                    class="px-4 py-2 bg-yellow-400 text-[#400000] font-semibold rounded-full shadow-md hover:bg-yellow-300 transition duration-300 transform hover:scale-105 active:scale-95">
-                ဆက်သွယ်ရန်
-            </button>
-        </div>
-    </nav>
-    
-    <div class="container mx-auto px-4 w-full max-w-sm md:max-w-md lg:max-w-lg z-10 relative">
-        <header class="text-center mb-6">
-            <h1 class="text-4xl font-extrabold text-yellow-300 drop-shadow-lg">Congratulations</h1>
-            <p class="text-lg text-white-200 mt-1">
-                2026 နှစ်သစ် ကံကောင်းခြင်း ငွေသွင်းမလို အခမဲ့ဘောနပ်ကို Channel Join ရရှိသွားသောမန်ဘာများ
-            </p>
-        </header>
-
-        <div id="list-container" class="bg-[#590000]/70 rounded-xl shadow-2xl backdrop-blur-sm border border-[#660000]/50 overflow-hidden overflow-y-auto h-[70vh] w-full transition duration-500">
-            <table class="min-w-full divide-y divide-[#660000]">
-                <thead class="bg-[#590000] sticky top-0 z-20 shadow-lg border-b border-yellow-300">
-                    <tr>
-                        <th class="player-cell w-1/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">No</th>
-                        <th class="player-cell w-3/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">Username</th>
-                    </tr>
-                </thead>
-                <tbody id="player-table-body" class="bg-transparent divide-y divide-[#660000]"></tbody>
-            </table>
-        </div>
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('player-table-body');
             const body = document.body;
             const SNOWFLAKE_COUNT = 50;
@@ -124,62 +33,51 @@
 
             for (let i = 0; i < SNOWFLAKE_COUNT; i++) { createSnowflake(); }
             
+            // အယောက် ၂၅၀ တိတိ စာရင်း
             const playerNames = [
-                "gk09889253032", "gkaungmyoswe", "gk09422173936", "gk09442840352", "gk09458928905", "gk09768175675", "gk09428325774", "gk09961265214", "gk09968380242", "gkssmmhh17",
-                "gk09420053038", "gkyaykhae7", "gk09681505269", "gk09676715699", "gk09689837635", "gk09683995466", "gk09891348863", "gk09943923525", "gk09674733678", "gk09958649911",
-                "gk09772244760", "gk09454636209", "gk09970757901", "gkyair78", "gk09762413789", "gk09969496135", "gk09676012614", "gk09693977143", "gkawwkyuu4", "gkmaymyatm",
-                "gk09777483287", "gk09699540551", "gkaungzinmoe", "gkkyikhin", "gk09671183440", "gk09442002678", "gk09663406232", "gkaungzin19", "gk00095150622", "gk09988625202",
-                "gk09650797331", "gk09782286435", "gkshasha94", "gk09517045000", "gk09693811916", "gk09400460796", "gk09758984309", "gk09776550242", "gkmoethiha", "gk09794533268",
-                "gk09675245201", "gk09690445014", "gk09787284601", "gk09682939335", "gk09976239631", "gk09253739557", "gk09964483052", "gk09663612445", "gk09777347823", "gk09695133202",
-                "gk09695278306", "gk09898886594", "gk09967223642", "gk09254001010", "gk09773726721", "gk09784149766", "gk09675691890", "gk09977376136", "gk09669718601", "gk09677263735",
-                "gk09941002311", "gk09975360094", "gk09781699090", "gk09671542730", "gk09684916111", "gk09764959676", "gk09891310063", "gk09685822094", "gk09678464075", "gk09981477206",
-                "gk09679584579", "gk09755604942", "gk09671074129", "gk09761592683", "gk09650084962", "gk09404600290", "gk09662528665", "gk09687482697", "gk09429404273", "gk09678047370",
-                "gk09987446260", "gk09403814249", "gk09974016271", "gk09668076407", "gk09695060073", "gk09696470050", "gk09699766366", "gk09767699643", "gk09693114171", "gk09794613335",
-                "gk09445195756", "gk09449825361", "gk09403170038", "gk09779273298", "gk09681346707", "gk09679352324", "gk09794956322", "gk09402785859", "gk09792821520", "gk09676362641",
-                "gk09972558411", "gk09767377692", "gk09402680267", "gk09988625202", "gk09988850650", "gk09682757872", "gk09667291084", "gk09678909225", "gk09979505611", "gk09883567521",
-                "gk09955429844", "gk09691888819", "gk09751719070", "gk09763400500", "gk09943713579", "gk09650703807", "gk09796499793", "gk09760415644", "gk09672747614", "gk09779520400",
-                "gk09682480092", "gk09691408279", "gk09256465513", "gk09400128223", "gk09691115948", "gk09671085990", "gk09682015107", "gk09667179729", "gk09256133755", "gk09753436757",
-                "gk09957023889", "gk09694602302", "gk09674172781", "gk09606384102", "gk09791822640", "gk09950555670", "gk09671542660", "gk09691917184", "gk09898624707", "gk09767168521",
-                "gk09428915580", "gk09695664722", "gk09970323568", "gk09684995843", "gk09960365459", "gk09663655231", "gk09663794273", "gk09694714657", "gk01121813557", "gk09793067787",
-                "gk09768650638", "gk09966801510", "gk09445584667", "gk09892823331", "gk09652921873", "gk09675740601", "gk09668095877", "gk09792217738", "gk09753734277", "gk09257530576",
-                "gk09757533135", "gk09660151129", "gk09774499023", "gk09251824707", "gk09693878615", "gk09426295475", "gk09963228073", "gk09760207945", "gk09664101509", "gk09697446736",
-                "gk09682280416", "gk09666239539", "gk09263133331", "gk09677356559", "gk09400995193", "gk09400282383", "gk09965292989", "gk09687772224", "gk09775634411", "gk09680506786",
-                "gk09971469495", "gk09771371195", "gk09671340575", "gk09666141700", "gk09266944345", "gk09660381965", "gk09425797238", "gk09766235234", "gk09409423043", "gk09446575152",
-                "gk09751154901", "gk09672288608", "gk09686195178", "gk09676939327", "gk09686588084", "gk09971595539", "gk09767294745", "gk09962593115", "gk09764998455", "gk09667653406",
-                "gk09674261572", "gk09765765631", "gk09794200296", "gk09681533447", "gk09400478043", "gk09688858616", "gk09665435473", "gk09670671021", "gk09691218683", "gk09670860122",
-                "gk09444119082", "gk09888962289", "gk09958220677", "gk09790969075", "gk09760194582", "gk09444888840", "gk09755394401", "gk09664222881", "gk09760640760", "gk09458373006",
-                "gk09661676439", "gk09697220573", "gk09678598356", "gk09269242456", "gk09786327329", "gk09681279161", "gk09976339034", "gk09963450002", "gk09885421150", "gk09972318499",
-                "gk09428010072", "gk09699366358", "gk09672189932", "gk09794189279", "gk09698154893", "gk09404757341", "gk09690408171", "gk09408504346", "gk09673428406", "gk09740854616",
-                "gk09250783983", "gk09667883999", "gk09757134436", "gk09678924421", "gk09661372333", "gk09776045249", "gk09680081217", "gk09787160835", "gk09755769057", "gk09760415516",
-                "gk09456647074", "gk09449097314", "gk09788830717", "gk09260160010", "gk09975941218", "gk09942424668", "gk09776335246", "gk09665781459", "gk09677417093", "gk09444776821",
-                "gk09775919069", "gk09667898636", "gk09250442922", "gk09269411522", "gk09793323912", "gk09680700347", "gk09699971538", "gk09444882045", "gk09670317894", "gk09262841534",
-                "gk09961466840", "gk09400700803", "gk09690596624", "gk09662496927", "gk09651390057", "gk09792408674", "gk09960427222", "gk09960011081", "gk09400705711", "gk09694727572",
-                "gk09773800194", "gk09697031203", "gk09693270617", "gk09693948020", "gk09890760599", "gk09665278441", "gk09256438268", "gk09766201910", "gk09889495149", "gk09981500158",
-                "gk09667160899", "gk09753650038", "gk09696338072", "gk09678634783", "gk09787284889", "gk09669495308", "gk09776154849", "gk09400200122", "gk09890637008", "gk09789803129",
-                "gk09684072244", "gk09797902070", "gk09405417687", "gk09964236735", "gk09762198827", "gk09682625094", "gk09781794123", "gk09787692060", "gk09752343816", "gk09660421039",
-                "gk09679047098", "gk09670281206", "gk09677444942", "gk09652312987", "gk09452551018", "gk09679237911", "gk09798407789", "gk09692425709", "gk09666632825", "gk09757866040",
-                "gk09784866187", "gk09652115195", "gk09451027795", "gk09403636497", "gk09768874473", "gk09680726465", "gk09453889569", "gk09402622918", "gk09681902435", "gk09652911522",
-                "gk09754927182", "gk09693930940", "gk09671044767", "gk09966153823", "gk09897695541", "gk09428163588", "gk09660554922", "gk09668070124", "gk09684345954", "gk09794689918",
-                "gk09985838845"
+                "gkkyawmin07", "gk2173710", "gk09772482843", "gk09765437664", "gk09773062702", "gk09423719916", "gkzawminhtk", "gk09785163916", "gk09776550242", "gkaungmyoswe",
+                "gk09685523835", "gk09968380242", "gk09675769541", "gk09442840352", "gkyaykhae7", "gk09699469320", "gk09265640785", "gkgo123go", "gk09882428284", "gk09797807727",
+                "gkssmmhh17", "gk09459669009", "gk09699724314", "gk09942959144", "gk09786277141", "gk09662888515", "gk09897669559", "gksawaear", "gk09787929150", "gk09883262366",
+                "gkasf44", "gkzm004", "gkfight56", "gkthithi7", "gkthithiay", "gk777gg", "gkhan113", "gkphoung64", "gkuusai777", "gkb5678",
+                "gkrsk4678", "gk12hhhht", "gkthanko7", "gkdokeg", "gkkkkg777", "gkkyiky", "gkasf4", "gknoo7644", "gk683268", "gksannyo",
+                "gkthiri99", "gkmyo4321", "gkshwe46", "gksoelay62", "gkgdragon2", "gk14736900", "gksooe", "gkgkthanso", "gkhninmhon", "gknaing951",
+                "gkkaung52", "gkzma77", "gkdemo009", "gkfgf5", "gkkt123456", "gkaun990", "gkthazin8", "gkants1234", "gklwin024", "gk545pst",
+                "gksan74863", "gkngweoo12", "gkmike234", "gkpaing67", "gkgugr", "gkminmin14", "gkoasis461", "gkaung1345", "gkjust", "gkphyo2447",
+                "gkhtoo218", "gkzin156", "gk777513", "gkhhk12", "gkdoublop", "gkmonlay11", "gktuktuk1", "gktuktuk", "gkasd444", "gk12345k",
+                "gk01382971", "gk12341236", "gk00883", "gknaym4237", "gk06512345", "gkjjjsaijj", "gkblopaypa", "gkhaw19", "gkaun1112", "gkkyawgy12",
+                "gkbanphp", "gkmonm", "gkmoekyawz", "gk12htay", "gkaungcho3", "gkttw12345", "gkleochan", "gkkk574", "gkasd111", "gkkimzokim",
+                "gktin1992", "gkywn777", "gk749365", "gkmoshi777", "gk5240303", "gkmrchina", "gknaingh", "gkshwephoe", "gknay970", "gkasd11",
+                "gkeimon77", "gkako699", "gkphway651", "gk263673", "gk8970547", "gkteehtike", "gkypm777", "gkgkjjko", "gkasd667", "gkkay222",
+                "gkfriday13", "gkasd4456", "gkkyaw181", "gkgrk124", "gkbbgg55", "gkktet679", "gkthi009", "gk108474", "gkshinekoo", "gkgkmyo776",
+                "gklzh38022", "gkgkycan", "gkgkyacha", "gkjustin7", "gk09449003", "gktmo2023", "gkpannn", "gkpopo940", "gkakl789", "gkeee11",
+                "gkswe333", "gkthetko1", "gk407366", "gksd1357", "gkwzo123", "gkpoei9506", "gkinpaing", "gkgkgkya", "gkgkgkyach", "gkgkyachan",
+                "gkgk337681", "gkzaw2023", "gk141506", "gksoes135", "gkta185", "gkzinmar56", "gklusi99", "gkmg13", "gkztk623", "gk5003",
+                "gkhaymana", "gknm789", "gkkkk77799", "gkmaihayma", "gk34890", "gkbn789", "gktio9", "gkth5th", "gkthatlin", "gkcv789",
+                "gkds12345", "gkasd23", "gkbingo99", "gksaungmin", "gkjustno77", "gkaye2508", "gkgkk7776", "gklwin1993", "gkthiha125", "gkerrr",
+                "gkstarligh", "gkyo9000", "gkaung7111", "gkew12345", "gkmy143", "gkfvhgh", "gkgaun11", "gkaph777", "gksma123", "gktharmhan",
+                "gk2828", "gkasd2234", "gkvnjjjj", "gkcec007", "gkawar895", "gkmkk12345", "gkasd322", "gkhky1234", "gknine768", "gkthida221",
+                "gkshee", "gktr12345", "gknaing780", "gkktphnda", "gkgvbcc", "gkkhnat5", "gkkolay888", "gk007game", "gk15511", "gkmar1234",
+                "gkzinc298", "gkzaw1992", "gknice2001", "gkn123456", "gktgu2222", "gkpinkpi", "gkz1234567", "gksi1990", "gkyan752", "gkaun999",
+                "gktartay34", "gkyeyinta7", "gkttm99t", "gkgxcx", "gkkl123456", "gkzee1234", "gkzx789", "gkgkkyamin", "gkasd4567", "gkcv1234",
+                "gkaung004", "gkhkk1234", "gkmsst12", "gk12aunght", "gkaun88", "gkwin961", "gkymt123", "gkqw123456", "gktt1674", "gksansan98"
             ];
 
             function generatePlayerList() {
                 tableBody.innerHTML = "";
-                // စုစုပေါင်း အယောက် ၃၅၀ ပြည့်အောင် loop ပတ်ခြင်း
-                for (let i = 0; i < 350; i++) {
-                    const num = playerNames[i % playerNames.length];
-                    const row = document.createElement("tr");
-                    row.className = "player-row";
-                    row.innerHTML = `
-                        <td class="player-cell text-yellow-300 font-bold">${i + 1}</td>
-                        <td class="player-cell text-white font-medium">${maskUsername(num)}</td>
-                    `;
-                    tableBody.appendChild(row);
+                // အယောက် ၂၅၀ တိတိ ထုတ်ပေးရန်
+                for (let i = 0; i < 250; i++) {
+                    const name = playerNames[i];
+                    if (name) {
+                        const row = document.createElement("tr");
+                        row.className = "player-row";
+                        row.innerHTML = `
+                            <td class="player-cell text-yellow-300 font-bold">${i + 1}</td>
+                            <td class="player-cell text-white font-medium">${maskUsername(name)}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    }
                 }
             }
 
             generatePlayerList();
         });
-    </script>
-</body>
-</html>
