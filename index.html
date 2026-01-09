@@ -1,4 +1,95 @@
-document.addEventListener('DOMContentLoaded', () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ကစားသမား စာရင်း (No. | Username)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background-color: #400000;
+            background-image: linear-gradient(to bottom, #400000, #660000);
+            overflow-x: hidden; 
+            position: relative;
+            padding-top: 6rem;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+        .snowflake {
+            position: absolute;
+            background: #FFFFFF;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+            will-change: transform;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            z-index: 10;
+        }
+
+        #list-container::-webkit-scrollbar { width: 8px; }
+        #list-container::-webkit-scrollbar-track { background: #330000; border-radius: 10px; }
+        #list-container::-webkit-scrollbar-thumb { background: #ffd700; border-radius: 10px; }
+
+        .player-row:nth-child(even) { background-color: rgba(90, 0, 0, 0.6); }
+        .player-row:nth-child(odd) { background-color: rgba(102, 0, 0, 0.6); }
+        .player-row:hover { background-color: rgba(130, 0, 0, 0.7) !important; }
+
+        .player-cell {
+            padding: 10px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased text-white relative pt-24 pb-10"> 
+    
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#590000] shadow-xl border-b border-yellow-300/50 h-20 flex items-center">
+        <div class="container mx-auto px-4 flex justify-between items-center w-full">
+            <div class="flex items-center space-x-3">
+                <img src="https://i0.wp.com/gkk777.net/wp-content/uploads/2025/05/photo_2024-05-05_18-26-46.jpg?fit=640%2C640&ssl=1" 
+                     alt="GKK 99 Logo" 
+                     class="h-10 w-10 rounded-lg border-2 border-yellow-300 object-cover"
+                     onerror="this.src='https://placehold.co/40x40/ffd700/400000?text=L';">
+                <span class="text-xl font-bold text-yellow-300 hidden sm:inline">GKK777</span>
+            </div>
+            <button onclick="window.location.href='https://gkk777cta.mssg.me/'"
+                    class="px-4 py-2 bg-yellow-400 text-[#400000] font-semibold rounded-full shadow-md hover:bg-yellow-300 transition duration-300 transform hover:scale-105 active:scale-95">
+                ဆက်သွယ်ရန်
+            </button>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 w-full max-w-sm md:max-w-md lg:max-w-lg z-10 relative">
+        <header class="text-center mb-6">
+            <h1 class="text-4xl font-extrabold text-yellow-300 drop-shadow-lg">Congratulations</h1>
+            <p class="text-lg text-white-200 mt-1">
+                2026 နှစ်သစ် ကံကောင်းခြင်း ငွေသွင်းမလို အခမဲ့ဘောနပ်ကို Channel Join ရရှိသွားသောမန်ဘာများ
+            </p>
+        </header>
+
+        <div id="list-container" class="bg-[#590000]/70 rounded-xl shadow-2xl backdrop-blur-sm border border-[#660000]/50 overflow-hidden overflow-y-auto h-[70vh] w-full transition duration-500">
+            <table class="min-w-full divide-y divide-[#660000]">
+                <thead class="bg-[#590000] sticky top-0 z-20 shadow-lg border-b border-yellow-300">
+                    <tr>
+                        <th class="player-cell w-1/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">No</th>
+                        <th class="player-cell w-3/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">Username</th>
+                    </tr>
+                </thead>
+                <tbody id="player-table-body" class="bg-transparent divide-y divide-[#660000]"></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('player-table-body');
             const body = document.body;
             const SNOWFLAKE_COUNT = 50;
@@ -33,13 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             for (let i = 0; i < SNOWFLAKE_COUNT; i++) { createSnowflake(); }
             
-            // အယောက် ၂၅၀ တိတိ စာရင်း
+            // အယောက် ၂၅၀ စာရင်း
             const playerNames = [
                 "gkkyawmin07", "gk2173710", "gk09772482843", "gk09765437664", "gk09773062702", "gk09423719916", "gkzawminhtk", "gk09785163916", "gk09776550242", "gkaungmyoswe",
                 "gk09685523835", "gk09968380242", "gk09675769541", "gk09442840352", "gkyaykhae7", "gk09699469320", "gk09265640785", "gkgo123go", "gk09882428284", "gk09797807727",
                 "gkssmmhh17", "gk09459669009", "gk09699724314", "gk09942959144", "gk09786277141", "gk09662888515", "gk09897669559", "gksawaear", "gk09787929150", "gk09883262366",
-                "gkasf44", "gkzm004", "gkfight56", "gkthithi7", "gkthithiay", "gk777gg", "gkhan113", "gkphoung64", "gkuusai777", "gkb5678",
-                "gkrsk4678", "gk12hhhht", "gkthanko7", "gkdokeg", "gkkkkg777", "gkkyiky", "gkasf4", "gknoo7644", "gk683268", "gksannyo",
+                "gkasf44", "gkzm004", "gkfight56", "gkthithi7", "gkthithiay", "gk777gg", "gkhan113", "gkphoung64", "gkuusai777", "gkb5678", "gkrsk4678", "gk12hhhht", "gkthanko7", "gkdokeg", "gkkkkg777", "gkkyiky", "gkasf4", "gknoo7644", "gk683268", "gksannyo",
                 "gkthiri99", "gkmyo4321", "gkshwe46", "gksoelay62", "gkgdragon2", "gk14736900", "gksooe", "gkgkthanso", "gkhninmhon", "gknaing951",
                 "gkkaung52", "gkzma77", "gkdemo009", "gkfgf5", "gkkt123456", "gkaun990", "gkthazin8", "gkants1234", "gklwin024", "gk545pst",
                 "gksan74863", "gkngweoo12", "gkmike234", "gkpaing67", "gkgugr", "gkminmin14", "gkoasis461", "gkaung1345", "gkjust", "gkphyo2447",
@@ -64,20 +154,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function generatePlayerList() {
                 tableBody.innerHTML = "";
-                // အယောက် ၂၅၀ တိတိ ထုတ်ပေးရန်
+                // အယောက် ၂၅၀ တိတိ ပြသရန် loop ပတ်ခြင်း
                 for (let i = 0; i < 250; i++) {
-                    const name = playerNames[i];
-                    if (name) {
-                        const row = document.createElement("tr");
-                        row.className = "player-row";
-                        row.innerHTML = `
-                            <td class="player-cell text-yellow-300 font-bold">${i + 1}</td>
-                            <td class="player-cell text-white font-medium">${maskUsername(name)}</td>
-                        `;
-                        tableBody.appendChild(row);
-                    }
+                    const name = playerNames[i % playerNames.length];
+                    const row = document.createElement("tr");
+                    row.className = "player-row";
+                    row.innerHTML = `
+                        <td class="player-cell text-yellow-300 font-bold">${i + 1}</td>
+                        <td class="player-cell text-white font-medium">${maskUsername(name)}</td>
+                    `;
+                    tableBody.appendChild(row);
                 }
             }
 
             generatePlayerList();
         });
+    </script>
+</body>
+</html>
