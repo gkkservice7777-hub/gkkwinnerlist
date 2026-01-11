@@ -13,7 +13,7 @@
             min-height: 100vh;
             background-color: #400000;
             background-image: linear-gradient(to bottom, #400000, #660000);
-            overflow-x: hidden; 
+            overflow: hidden; 
             position: relative;
             padding-top: 6rem;
         }
@@ -60,6 +60,7 @@
                      onerror="this.src='https://placehold.co/40x40/ffd700/400000?text=L';">
                 <span class="text-xl font-bold text-yellow-300 hidden sm:inline">GKK777</span>
             </div>
+            
             <button onclick="window.location.href='https://gkk777cta.mssg.me/'"
                     class="px-4 py-2 bg-yellow-400 text-[#400000] font-semibold rounded-full shadow-md hover:bg-yellow-300 transition duration-300 transform hover:scale-105 active:scale-95">
                 ဆက်သွယ်ရန်
@@ -79,8 +80,8 @@
             <table class="min-w-full divide-y divide-[#660000]">
                 <thead class="bg-[#590000] sticky top-0 z-20 shadow-lg border-b border-yellow-300">
                     <tr>
-                        <th class="player-cell w-1/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">No</th>
-                        <th class="player-cell w-3/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">Username</th>
+                        <th scope="col" class="player-cell w-1/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">No</th>
+                        <th scope="col" class="player-cell w-3/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">Username</th>
                     </tr>
                 </thead>
                 <tbody id="player-table-body" class="bg-transparent divide-y divide-[#660000]"></tbody>
@@ -92,18 +93,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('player-table-body');
             const body = document.body;
-            const SNOWFLAKE_COUNT = 50;
+            const SNOWFLAKE_COUNT = 100;
+            const MAX_PLAYERS = 350; 
 
             function maskUsername(username) {
                 if (!username) return "";
                 let masked = "";
+                let charCount = 0; 
                 for (let i = 0; i < username.length; i++) {
-                    if (i === 0 || i === username.length - 1) {
-                        masked += username[i];
-                    } else if (i % 2 === 0) {
-                        masked += "*";
+                    const char = username[i];
+                    if (char === ' ') {
+                        masked += ' ';
                     } else {
-                        masked += username[i];
+                        masked += (charCount % 2 === 0) ? char : '*';
+                        charCount++;
                     }
                 }
                 return masked;
@@ -122,49 +125,109 @@
                 body.appendChild(snowflake);
             }
 
-            for (let i = 0; i < SNOWFLAKE_COUNT; i++) { createSnowflake(); }
-            
-            // အယောက် ၂၅၀ စာရင်း
-            const playerNames = [
-                "gkkyawmin07", "gk2173710", "gk09772482843", "gk09765437664", "gk09773062702", "gk09423719916", "gkzawminhtk", "gk09785163916", "gk09776550242", "gkaungmyoswe",
-                "gk09685523835", "gk09968380242", "gk09675769541", "gk09442840352", "gkyaykhae7", "gk09699469320", "gk09265640785", "gkgo123go", "gk09882428284", "gk09797807727",
-                "gkssmmhh17", "gk09459669009", "gk09699724314", "gk09942959144", "gk09786277141", "gk09662888515", "gk09897669559", "gksawaear", "gk09787929150", "gk09883262366",
-                "gkasf44", "gkzm004", "gkfight56", "gkthithi7", "gkthithiay", "gk777gg", "gkhan113", "gkphoung64", "gkuusai777", "gkb5678", "gkrsk4678", "gk12hhhht", "gkthanko7", "gkdokeg", "gkkkkg777", "gkkyiky", "gkasf4", "gknoo7644", "gk683268", "gksannyo",
-                "gkthiri99", "gkmyo4321", "gkshwe46", "gksoelay62", "gkgdragon2", "gk14736900", "gksooe", "gkgkthanso", "gkhninmhon", "gknaing951",
-                "gkkaung52", "gkzma77", "gkdemo009", "gkfgf5", "gkkt123456", "gkaun990", "gkthazin8", "gkants1234", "gklwin024", "gk545pst",
-                "gksan74863", "gkngweoo12", "gkmike234", "gkpaing67", "gkgugr", "gkminmin14", "gkoasis461", "gkaung1345", "gkjust", "gkphyo2447",
-                "gkhtoo218", "gkzin156", "gk777513", "gkhhk12", "gkdoublop", "gkmonlay11", "gktuktuk1", "gktuktuk", "gkasd444", "gk12345k",
-                "gk01382971", "gk12341236", "gk00883", "gknaym4237", "gk06512345", "gkjjjsaijj", "gkblopaypa", "gkhaw19", "gkaun1112", "gkkyawgy12",
-                "gkbanphp", "gkmonm", "gkmoekyawz", "gk12htay", "gkaungcho3", "gkttw12345", "gkleochan", "gkkk574", "gkasd111", "gkkimzokim",
-                "gktin1992", "gkywn777", "gk749365", "gkmoshi777", "gk5240303", "gkmrchina", "gknaingh", "gkshwephoe", "gknay970", "gkasd11",
-                "gkeimon77", "gkako699", "gkphway651", "gk263673", "gk8970547", "gkteehtike", "gkypm777", "gkgkjjko", "gkasd667", "gkkay222",
-                "gkfriday13", "gkasd4456", "gkkyaw181", "gkgrk124", "gkbbgg55", "gkktet679", "gkthi009", "gk108474", "gkshinekoo", "gkgkmyo776",
-                "gklzh38022", "gkgkycan", "gkgkyacha", "gkjustin7", "gk09449003", "gktmo2023", "gkpannn", "gkpopo940", "gkakl789", "gkeee11",
-                "gkswe333", "gkthetko1", "gk407366", "gksd1357", "gkwzo123", "gkpoei9506", "gkinpaing", "gkgkgkya", "gkgkgkyach", "gkgkyachan",
-                "gkgk337681", "gkzaw2023", "gk141506", "gksoes135", "gkta185", "gkzinmar56", "gklusi99", "gkmg13", "gkztk623", "gk5003",
-                "gkhaymana", "gknm789", "gkkkk77799", "gkmaihayma", "gk34890", "gkbn789", "gktio9", "gkth5th", "gkthatlin", "gkcv789",
-                "gkds12345", "gkasd23", "gkbingo99", "gksaungmin", "gkjustno77", "gkaye2508", "gkgkk7776", "gklwin1993", "gkthiha125", "gkerrr",
-                "gkstarligh", "gkyo9000", "gkaung7111", "gkew12345", "gkmy143", "gkfvhgh", "gkgaun11", "gkaph777", "gksma123", "gktharmhan",
-                "gk2828", "gkasd2234", "gkvnjjjj", "gkcec007", "gkawar895", "gkmkk12345", "gkasd322", "gkhky1234", "gknine768", "gkthida221",
-                "gkshee", "gktr12345", "gknaing780", "gkktphnda", "gkgvbcc", "gkkhnat5", "gkkolay888", "gk007game", "gk15511", "gkmar1234",
-                "gkzinc298", "gkzaw1992", "gknice2001", "gkn123456", "gktgu2222", "gkpinkpi", "gkz1234567", "gksi1990", "gkyan752", "gkaun999",
-                "gktartay34", "gkyeyinta7", "gkttm99t", "gkgxcx", "gkkl123456", "gkzee1234", "gkzx789", "gkgkkyamin", "gkasd4567", "gkcv1234",
-                "gkaung004", "gkhkk1234", "gkmsst12", "gk12aunght", "gkaun88", "gkwin961", "gkymt123", "gkqw123456", "gktt1674", "gksansan98"
-            ];
+            for (let i = 0; i < SNOWFLAKE_COUNT; i++) createSnowflake();
 
-            function generatePlayerList() {
-                tableBody.innerHTML = "";
-                // အယောက် ၂၅၀ တိတိ ပြသရန် loop ပတ်ခြင်း
-                for (let i = 0; i < 250; i++) {
-                    const name = playerNames[i % playerNames.length];
-                    const row = document.createElement("tr");
-                    row.className = "player-row";
-                    row.innerHTML = `
-                        <td class="player-cell text-yellow-300 font-bold">${i + 1}</td>
-                        <td class="player-cell text-white font-medium">${maskUsername(name)}</td>
-                    `;
-                    tableBody.appendChild(row);
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
                 }
+            }
+            
+            function generatePlayerList() {
+                const newGameIDs = [
+                    "gketharr1671", "gk09773606841", "gk09677992818", "gk09680783026", "gk09420100779",
+                    "gk09680513996", "gk09251102308", "gk09891348863", "gk09402506837", "gk09764377269",
+                    "gk09750536606", "gk09680674582", "gk09974977848", "gk09680695798", "gk09967073689",
+                    "gk09943923525", "gk09451789391", "gk09758984309", "gk09421805842", "gk09780519528",
+                    "gk09783943795", "gkmoethiha", "gk09692528345", "gk09697286535", "gkshasha94",
+                    "gktalon", "gk09250144856", "gk09662348095", "gk09778844040", "gk00095150622",
+                    "gk272022", "gkinko", "gknhl222", "gkthinlate", "gkhnaung9988", "gkchomayoo",
+                    "gksawchitthu", "gkaungmyintm", "gk123shwe", "gkvoldemort7", "gkmuyar789",
+                    "gkphyolay359", "gk98703613", "gkphyoelay35", "gkkhinzar99", "gk110026",
+                    "gkaikephyu", "gkkyaw96300", "gkdonater", "gkkhing999", "gkkosxwemoe1",
+                    "gkhtoo187", "gksulatt520", "gkzawnaingwi", "gkqpa123", "gk687160907",
+                    "gkgkk777007", "gk27493", "gk2349145", "gkeuri000772", "gksithu079",
+                    "gk183202", "gk123456788", "gkzawm01", "gkkozay1", "gkzinmg223",
+                    "gk0967994836", "gkkolar", "gkthazin1111", "gkmyat11234", "gkmaxwin75",
+                    "gkkbz234", "gk256840", "gkaungse", "gknoeyati316", "gkhlwanaung1",
+                    "gktoe1921994", "gkmoea1357", "gklujia68968", "gk77222dm", "gkkosaiwin11",
+                    "gkhlm123", "gkthetaung70", "gkok909090", "gk56got56", "gk2656",
+                    "gksoehtet199", "gkrot222", "gkkyaw9834", "gknaiing670", "gkko85",
+                    "gkzawhte1234", "gkhtetli1234", "gkkaung24104", "gkkokyaw436", "gk5504227",
+                    "gk11776426", "gkkayin11223", "gkpeter119", "gksittnaing7", "gkboys4545",
+                    "gkaa97999852", "gkgamelee", "gk4897", "gksaikyaw29", "gkmwakoko",
+                    "gknilar1978", "gkwanwan77", "gk5083", "gkphyoaung31", "gkthein115",
+                    "gkthi1359", "gkking3493", "gkshine77887", "gkbmk556", "gknan076",
+                    "gktayzar223", "gkkhur789", "gkbennet", "gkrena1", "gkkyaw5577",
+                    "gkgkk679627", "gkkoaung555", "gkaa234234", "gkkmh232003", "gkkotharngwe",
+                    "gkmangyi77", "gkchawsuhan1", "gkdaing", "gkkhaing3810", "gktuntun333",
+                    "gkngungu2004", "gkxan80", "gkzinminoo34", "gk0967187285", "gkulay2687",
+                    "gkats5544", "gkkung679", "gkpyaep22333", "gkmrthet", "gklinaung12",
+                    "gk777khin999", "gkrai77", "gkthin192559", "gkzawzaw4567", "gknayshine3",
+                    "gkhhzaw12345", "gk422024", "gksithu2468", "gkaunghtet19", "gkgkkk457882",
+                    "gkxxxxt1", "gkzwe34567", "gksoedye", "gkphyowailwi", "gk25101712",
+                    "gk1343kokoko", "gkumin1459", "gkdppk", "gkthuy5779", "gkyartg25",
+                    "gknyein2000", "gkthaw2661", "gkwy234567", "gkkhunjimmy", "gkha1919",
+                    "gksha2055sha", "gk15005288", "gk13456788", "gkkelvinmist", "gklinphyo8",
+                    "gkminmin954", "gkgnshmt1", "gkmonkeybike", "gkthandar773", "gkpsw1122",
+                    "gkminminsoe", "gkkeyy007", "gkhein3295", "gkblackworld", "gkzarzarkyaw",
+                    "gkayethidar", "gkpainggye12", "gkae123456", "gkkta1234", "gk2482020",
+                    "gkhtoo906", "gkapt123", "gkppp388", "gkphyonage", "gkphyu286199",
+                    "gkelectrical", "gkabc1999327", "gkchanchan7", "gkkolin8899k", "gkwtk567890",
+                    "gk19jo", "gkthein879", "gksanlin52", "gkhsuwai8820", "gkwinbo246",
+                    "gkluckyhnin", "gkkyaw151", "gkaung7421", "gkaungzaya25", "gkaeiou223",
+                    "gknora2003", "gkanm312003", "gkchangyi12", "gkzaw7777033", "gkmoekha16",
+                    "gk0988979442", "gkmyol88", "gkmoekha124", "gkpolo123", "gkgg007172",
+                    "gk125345", "gkkosanyu", "gkphyoeyone", "gkpoukpouk23", "gkkar1997",
+                    "gk77777tth", "gklinn5666", "gkonelboss13", "gk22446688tt", "gkfoech55a22",
+                    "gkyarsu", "gkkyawzinhte", "gkzinmar652", "gkkothu33112", "gkakkar12",
+                    "gkkyaw801433", "gkayo1234", "gkthynder21", "gkpz420k", "gkkozaw22",
+                    "gkemperia", "gkwinzaw584", "gkcbtsdhg", "gkwinmoe199", "gkmathinthin",
+                    "gknine7890", "gkmyonin99", "gkgkktuntuno", "gkarrdar", "gkzawm1122",
+                    "gkshin112212", "gkhtet243", "gkk1982", "gktheina27", "gk1335602765",
+                    "gk22558800", "gkaass1123", "gkmmt55556", "gkktm993", "gkkwto2222",
+                    "gkzipperqt99", "gkmmm299", "gkjkkk1234", "gkuuu1111", "gkooooko20",
+                    "gkmayzinoo1", "gkchocho1111", "gkpt777", "gkcukurukuk", "gkzinmyowin",
+                    "gk2131", "gknathan007", "gkkaungkh123", "gkamisoe24", "gkkomgwin",
+                    "gkhaykoko", "gkyuo375", "gkcoe99999", "gkmyint117", "gkbn200011",
+                    "gkaunghtetli", "gkminkhant17", "gkyellow1995", "gkzinlat72", "gkzar5544",
+                    "gkking10009", "gkmzokts", "gkhtetpaings", "gkmyothuya99", "gkaa889900",
+                    "gktayza888", "gkkson934", "gkwinnykhin", "gkmanvi56", "gkkaung721",
+                    "gkukyaw44144", "gkmyochit703", "gkooppoopp", "gkphain890", "gk1196",
+                    "gkmayoo1993", "gkdark444", "gklogxx74", "gkbravo711", "gksoenai123",
+                    "gkak88810", "gkaungthiha7", "gkhtut121212", "gkhnin2024", "gkmyogyioo",
+                    "gknaingwin95", "gkkaythwelph", "gkyazar1687", "gkzwe7541", "gkmyatmin789",
+                    "gk2818", "gkppappatktk", "gkyuzana1234", "gkabtk9119", "gk233208",
+                    "gkcmmc0000", "gkgkk007777", "gklwinsoe123", "gkkg21", "gkgkkk7409",
+                    "gkmmb99", "gkgordlay199", "gk1122zaw11", "gktyru6789", "gk16593900",
+                    "gkarkar2024", "gk92589", "gknan2000", "gkmtg009", "gkseinmya",
+                    "gkzmtyoo25", "gkaungnam123", "gkthiha1471", "gkatttm11", "gkaungmk1234",
+                    "gkmyataa3", "gkmyolay1990", "gkkyawzay4", "gkzawlin900", "gkngwe147",
+                    "gkbm00000478", "gkaungzaw11", "gkzzh64", "gkpz757", "gkooppl777",
+                    "gkzawwin2345", "gkminmin2811", "gkkgkg1995", "gksithu1233"
+                ];
+
+                // စုစုပေါင်း ၃၅၀ ပြည့်ရန် လိုအပ်သော နံပါတ်များ ထပ်ဖြည့်ခြင်း (လိုအပ်လျှင်)
+                let finalUsernames = [...newGameIDs];
+                while(finalUsernames.length < MAX_PLAYERS) {
+                    finalUsernames.push("gk" + Math.floor(100000 + Math.random() * 900000));
+                }
+
+                shuffleArray(finalUsernames); 
+
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < MAX_PLAYERS; i++) {
+                    const row = document.createElement('tr');
+                    row.className = "player-row hover:bg-[#820000]/70 transition duration-150";
+                    const maskedName = maskUsername(finalUsernames[i]); 
+                    row.innerHTML = `
+                        <td class="player-cell whitespace-nowrap text-sm font-medium text-yellow-300">${i + 1}</td>
+                        <td class="player-cell whitespace-nowrap text-base font-semibold text-white">${maskedName}</td>
+                    `;
+                    fragment.appendChild(row);
+                }
+                tableBody.appendChild(fragment);
             }
 
             generatePlayerList();
