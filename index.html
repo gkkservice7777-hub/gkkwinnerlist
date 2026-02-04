@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ကစားသမား စာရင်း (No. | Username)</title>
+    <title>ကစားသမား စာရင်း (GKK777)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
@@ -55,14 +55,11 @@
         <div class="container mx-auto px-4 flex justify-between items-center w-full">
             <div class="flex items-center space-x-3">
                 <img src="https://i0.wp.com/gkk777.net/wp-content/uploads/2025/05/photo_2024-05-05_18-26-46.jpg?fit=640%2C640&ssl=1" 
-                     alt="GKK 99 Logo" 
-                     class="h-10 w-10 rounded-lg border-2 border-yellow-300 object-cover"
-                     onerror="this.src='https://placehold.co/40x40/ffd700/400000?text=L';">
+                     alt="Logo" class="h-10 w-10 rounded-lg border-2 border-yellow-300 object-cover">
                 <span class="text-xl font-bold text-yellow-300 hidden sm:inline">GKK777</span>
             </div>
-            
             <button onclick="window.location.href='https://gkk777cta.mssg.me/'"
-                    class="px-4 py-2 bg-yellow-400 text-[#400000] font-semibold rounded-full shadow-md hover:bg-yellow-300 transition duration-300 transform hover:scale-105 active:scale-95">
+                    class="px-4 py-2 bg-yellow-400 text-[#400000] font-semibold rounded-full shadow-md hover:bg-yellow-300 transition duration-300">
                 ဆက်သွယ်ရန်
             </button>
         </div>
@@ -71,17 +68,15 @@
     <div class="container mx-auto px-4 w-full max-w-sm md:max-w-md lg:max-w-lg z-10 relative">
         <header class="text-center mb-6">
             <h1 class="text-4xl font-extrabold text-yellow-300 drop-shadow-lg">Congratulations</h1>
-            <p class="text-lg text-white-200 mt-1">
-                2026 နှစ်သစ် ကံကောင်းခြင်း ငွေသွင်းမလို အခမဲ့ဘောနပ်ကို Channel Join ရရှိသွားသောမန်ဘာများ
-            </p>
+            <p class="text-lg text-white-200 mt-1">2026 နှစ်သစ် အခမဲ့ဘောနပ် ရရှိသူများ</p>
         </header>
 
-        <div id="list-container" class="bg-[#590000]/70 rounded-xl shadow-2xl backdrop-blur-sm border border-[#660000]/50 overflow-hidden overflow-y-auto h-[70vh] w-full transition duration-500">
+        <div id="list-container" class="bg-[#590000]/70 rounded-xl shadow-2xl backdrop-blur-sm border border-[#660000]/50 overflow-hidden overflow-y-auto h-[70vh] w-full">
             <table class="min-w-full divide-y divide-[#660000]">
                 <thead class="bg-[#590000] sticky top-0 z-20 shadow-lg border-b border-yellow-300">
                     <tr>
-                        <th scope="col" class="player-cell w-1/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">No</th>
-                        <th scope="col" class="player-cell w-3/4 font-extrabold text-sm uppercase tracking-wider text-yellow-300">Username</th>
+                        <th class="player-cell w-1/4 font-extrabold text-sm uppercase text-yellow-300">No</th>
+                        <th class="player-cell w-3/4 font-extrabold text-sm uppercase text-yellow-300">Username</th>
                     </tr>
                 </thead>
                 <tbody id="player-table-body" class="bg-transparent divide-y divide-[#660000]"></tbody>
@@ -92,110 +87,70 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('player-table-body');
-            const body = document.body;
             const SNOWFLAKE_COUNT = 80;
 
-            function maskUsername(username) {
-                if (!username) return "";
-                let masked = "";
-                let charCount = 0; 
-                for (let i = 0; i < username.length; i++) {
-                    const char = username[i];
-                    if (char === ' ') { masked += ' '; } 
-                    else {
-                        if (charCount % 2 === 0) { masked += char; } 
-                        else { masked += '*'; }
-                        charCount++;
-                    }
+            const playerList = [
+                "gk09440890670", "gk09445883586", "gk09250167624", "gk09943923525", "gk09267458647", "gktalon", "gk09689837635", "gk09422173936", "gk09678921938", "gkmyint00123",
+                "gk09967717378", "gk09693811916", "gk09458928905", "gk09750253088", "gk09262521477", "gk09668515271", "gk09428325774", "gk09662348095", "gknay717", "gk09740944438",
+                "gk09687251005", "gk09791841227", "gk09773606841", "gk09752913612", "gk09420181195", "gk09782286435", "gk09758984309", "gk09799141662", "gkakmk", "gkayeaye123",
+                "gk09969382640", "gk09664253737", "gk09977868434", "gk09697279184", "gk09668888693", "gk09785849241", "gk09400435486", "gk09450272370", "gk09440830117", "gk09956086250",
+                "gk09670386455", "gk09650793341", "gk09259907226", "gk09650402188", "gk09695338613", "gk09299401946", "gk09762190884", "gk09689092357", "gk09699435673", "gk09783740348",
+                "gk09772430480", "gk09774581233", "gk09893819794", "gk09663857153", "gk09401384782", "gk09694292458", "gk09400327720", "gk09458858813", "gk09979598409", "gk09883256846",
+                "gk09420240478", "gk09698101336", "gk09674246985", "gk09681298689", "gk09661899695", "gk09669155748", "gk09424262253", "gk09972583538", "gk09675857266", "gk09440523600",
+                "gk09664223222", "gk09788038235", "gk09660477198", "gk09762480816", "gk09680417786", "gk09425047320", "gk09686437932", "gk09786762859", "gk09691542355", "gk09784639262",
+                "gk09259181882", "gk09661652284", "gk09256354484", "gk09264885270", "gk09768541713", "gk09696658858", "gk09697590611", "gk09799849316", "gk09666197175", "gk09798428211",
+                "gk09665078977", "gk09698635559", "gk09777768784", "gk09688580196", "gk09975669101", "gk09661401502", "gk09962756513", "gk09775125146", "gk09674318802", "gk09763061839",
+                "gk09421708024", "gk09674925515", "gk09675803133", "gk09954578304", "gk09451288120", "gk09792667407", "gk09698819497", "gk09966644477", "gk09799430541", "gk09763764412",
+                "gk09404474815", "gk09783166568", "gk09441769363", "gk09781250316", "gk09798597363", "gk09754073134", "gk09428006007", "gk09694254466", "gk09662222504", "gk09955679850",
+                "gk09770821625", "gk09792468129", "gk09663292189", "gk00943044608", "gk09893910523", "gk09756299711", "gk09952228910", "gk09775529151", "gk09761743435", "gk09427848821",
+                "gk09780904499", "gk09422558704", "gk09689006151", "gk09959100997", "gk09789779617", "gk09957572390", "gk09798595324", "gk09773571726", "gk09756796594", "gk09650345840",
+                "gk09664591268", "gk09981380291", "gk09758250354", "gk09674191594", "gk09969382585", "gk09688492941", "gk09798684985", "gk09256630688", "gk09788071897", "gk09777745672",
+                "gk09790632909", "gk09779253714", "gk09794583168", "gk09660465927", "gk09692903975", "gk09697603213", "gk09441295837", "gk09268162231", "gk09751429124", "gk09661814174",
+                "gk09796041235", "gk09668776709", "gk09762041759", "gk09444706316", "gk09983454172", "gk09402972137", "gk09684356925", "gk09790949785", "gk09698693054", "gk09769707797",
+                "gk09686021318", "gk09690605351", "gk09454111242", "gk09678464015", "gk09441439426", "gk09791331852", "gk09699732084", "gk09771057598", "gk09699461530", "gk09427807205",
+                "gk09426751126", "gk09799582491", "gk09765087597", "gk09988167695", "gk09679537422", "gk09401884552", "gk09757825967", "gk09679681327", "gk09758575411", "gk09791636286",
+                "gk09776685090", "gk09986063539", "gk09258997989", "gk09665284654", "gk09783155590", "gk09784745946", "gk09425725428", "gk09687877127", "gk09979978605", "gk09259441750",
+                "gk09698699354", "gk09789719871", "gk09771103138", "gk09687828460", "gk09784189878", "gk09662551965", "gk09979364155", "gk09943036397", "gk09661951471", "gk09699878123",
+                "gk09253946686", "gk09760169549", "gk09674705950", "gk09778152417", "gk09680380654", "gk09760720747", "gk09684032589", "gk09445748989", "gk09777567171", "gk09697500026",
+                "gk09688479751", "gk09686582383", "gk09269672802", "gk09880386700", "gk09777508539", "gk09768505462", "gk09980477534", "gk09750933787", "gk09676411575", "gk09883777429",
+                "gk09884867667", "gk09684976841", "gk09663992639", "gk09982163166", "gk09426618683", "gk09696228997", "gk09668563612", "gk09775941576", "gk09784283547", "gk09267080004",
+                "gk09760381529", "gk09976206077", "gk09788757366", "gk09666357029", "gk09781996310", "gk09772867781", "gk09253464398", "gk09978505939", "gk09685609030", "gk09263378035"
+            ];
+
+            function maskUsername(u) {
+                let m = ""; let c = 0;
+                for (let i = 0; i < u.length; i++) {
+                    if (u[i] === ' ') { m += ' '; }
+                    else { m += (c % 2 === 0) ? u[i] : '*'; c++; }
                 }
-                return masked;
-            }
-            
-            function createSnowflake() {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                const size = Math.random() * 3 + 1; 
-                snowflake.style.width = `${size}px`;
-                snowflake.style.height = `${size}px`;
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.animationDuration = `${Math.random() * 20 + 10}s`;
-                snowflake.style.animationDelay = `-${Math.random() * 15}s`;
-                snowflake.style.top = `${-Math.random() * 100}px`;
-                body.appendChild(snowflake);
+                return m;
             }
 
-            for (let i = 0; i < SNOWFLAKE_COUNT; i++) { createSnowflake(); }
-
-            function shuffleArray(array) {
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-            }
-            
-            function generatePlayerList() {
-                const finalUsernames = [
-                    "gk09943923525", "gklion28", "gk09689837635", "gk09420149396", "gk09977540940",
-                    "gk09891348863", "gk09754463026", "gknlynn118", "gk061958", "gk09698040302",
-                    "gknay5353", "gk09757429717", "gk09955633286", "gk09783410972", "gk09785124814",
-                    "gk09964937156", "gkyair78", "gk09673341279", "gk09662348095", "gk09421007620",
-                    "gk09780519528", "gk09671623279", "gk09782286435", "gk09778844040", "gksty1467g",
-                    "gk09445107441", "gkayethin1", "gk09773062702", "gk09758984309", "gk09964799330",
-                    "gkzaw65", "gkarar", "gkthiha330", "gkmk4567", "gkmm900", "gkkmt66", "gkere5556",
-                    "gkaung1968", "gkert56", "gk123hein", "gktartar12", "gkwave456", "gk211006",
-                    "gkstatus", "gkzaw114", "gk772873", "gklineup", "gkhtet979", "gkhwh999",
-                    "gkkyaw4422", "gkkzh50", "gksaigk", "gkset45", "gkjunesunn", "gkaungaye1",
-                    "gkasw888", "gksoepain8", "gkphyu156", "gksoelwin1", "gkthaung16", "gkgkk777te",
-                    "gkpayiphyo", "gkyinlay47", "gkgod31", "gkewr45", "gk8888aaa", "gktha30173",
-                    "gkzinm2002", "gkdse5", "gklynnthar", "gkkhant125", "gkcmgkk", "gkyzmin54",
-                    "gkchitko24", "gkkyaw2221", "gk1388hein", "gkrrr77", "gkkkk83", "gksanyushw",
-                    "gkwinner97", "gkaa969969", "gka7777777", "gkmamoe78", "gkmgkhant7", "gktzaa",
-                    "gkert5", "gkgkk96", "gk96kyawzi", "gkyunadatu", "gkminbhone", "gkere578",
-                    "gkpph321", "gktwz1", "gk445593", "gk21lm", "gksea55", "gkkokn", "gkwinmg7",
-                    "gkgkzayyar", "gk9nine", "gkzawzinla", "gktyron7", "gkchit6524", "gkkkwai",
-                    "gkm090", "gk199o", "gkese67", "gkjohnny90", "gktunnn12", "gkmask345",
-                    "gkqpqpqp", "gk691734", "gkmoed123", "gkkyaw4882", "gkngelay99", "gkgyan1234",
-                    "gkmmm090", "gkthein134", "gkyatilin", "gkphyoyaza", "gk5678999", "gk18751187",
-                    "gkd666", "gkere3344", "gkwew567", "gkwinhla98", "gkanann", "gkcane11",
-                    "gk199745", "gkdoonut78", "gkwin0022", "gk09958586", "gk1212saya", "gk12rgyi",
-                    "gknayphyo", "gkgffdg452", "gksoemoe5", "gkewe7", "gkksm99556", "gkere456",
-                    "gksm64", "gkyet2004", "gkert7", "gkkosoe49", "gksai7860", "gk775296",
-                    "gkktl54", "gkamone5", "gk8888888m", "gksein467", "gkthesai99", "gkpyaewi",
-                    "gkzawte34", "gkcion88", "gkstn7", "gkkyaw7654", "gkslotrap", "gkthuya35",
-                    "gkzkoko777", "gkptk0090", "gkearthqua", "gkkolin21", "gk60002", "gkmyozawtu",
-                    "gktzt008", "gktzt007", "gktdc1089", "gkpk251015", "gkphyu72", "gk2345ttl",
-                    "gkttt7777", "gkkhun29", "gkkyaing13", "gkmyint657", "gkkyal11", "gktt882",
-                    "gk059170", "gkhks2023", "gkkoko9984", "gkyhha98", "gkmon778", "gktar121",
-                    "gkmkgkk777", "gkkyawlw", "gkkoh555", "gkhtoo2003", "gkaye457", "gkawwgyi05",
-                    "gk795003", "gkrtr55", "gkyoon26", "gkxar000", "gkwarso34", "gksoesoe76",
-                    "gk19986", "gkkya12345", "gkmt96", "gkkosithu7", "gkootin21", "gknilarshw",
-                    "gka1b2c", "gkayeminp", "gknay56", "gkzar0000", "gkdann123", "gksting750",
-                    "gkere334", "gkxtetmin7", "gk09896226", "gkneosan", "gk474nl", "gkamo7",
-                    "gkvoize", "gkpouksii", "gk0967213", "gksew7", "gkkg141996", "gkkhing49",
-                    "gk39200", "gk780112", "gkapple8", "gk33019", "gk270307", "gkere55555",
-                    "gkgkkzaw70", "gkpk999999", "gkkks1993", "gksoethu75", "gkkyaw1788", "gk1876",
-                    "gkkya1212", "gk2948", "gkkkkmm", "gksoenuko", "gk762788", "gk774006",
-                    "gkxxx23", "gkzkt99", "gkmyathu1", "gkwp218", "gkmoe4958", "gktno11111",
-                    "gkses456", "gkthier1", "gksoe24680", "gktangiyos", "gkgkkmyoky", "gkmotelayr",
-                    "gktargyi", "gkkkyaw007"
-                ];
-
-                shuffleArray(finalUsernames); 
-                const fragment = document.createDocumentFragment();
-
-                finalUsernames.forEach((name, index) => {
-                    const row = document.createElement('tr');
-                    row.className = "player-row hover:bg-[#820000]/70 transition duration-150";
-                    row.innerHTML = `
-                        <td class="player-cell whitespace-nowrap text-sm font-medium text-yellow-300">${index + 1}</td>
-                        <td class="player-cell whitespace-nowrap text-base font-semibold text-white">${maskUsername(name)}</td>
-                    `;
-                    fragment.appendChild(row);
-                });
-                tableBody.appendChild(fragment);
+            function createSnow() {
+                const s = document.createElement('div');
+                s.classList.add('snowflake');
+                const size = Math.random() * 3 + 1;
+                s.style.width = s.style.height = `${size}px`;
+                s.style.left = `${Math.random() * 100}vw`;
+                s.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                s.style.animationDelay = `-${Math.random() * 15}s`;
+                s.style.top = `${-Math.random() * 100}px`;
+                document.body.appendChild(s);
             }
 
-            generatePlayerList();
+            for (let i = 0; i < SNOWFLAKE_COUNT; i++) createSnow();
+
+            const fragment = document.createDocumentFragment();
+            playerList.forEach((name, index) => {
+                const row = document.createElement('tr');
+                row.className = "player-row transition duration-150";
+                row.innerHTML = `
+                    <td class="player-cell text-sm font-medium text-yellow-300">${index + 1}</td>
+                    <td class="player-cell text-base font-semibold text-white">${maskUsername(name)}</td>
+                `;
+                fragment.appendChild(row);
+            });
+            tableBody.appendChild(fragment);
         });
     </script>
 </body>
